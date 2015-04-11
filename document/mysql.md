@@ -50,14 +50,14 @@
 
 ```javascript
     shell> mysqldump -h host -u root -p dbname >dbname_backup.sql 
-``` 
+```
 
 **恢复数据库:**
 
 ```javascript
     shell> mysqladmin -h myhost -u root -p create dbname 
     shell> mysqldump -h host -u root -p dbname < dbname_backup.sql  
-``` 
+```
 
 ### 参考资料
 
