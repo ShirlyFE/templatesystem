@@ -3,25 +3,66 @@
 ### mysql常用命令
 
 ***show databases;*** 显示数据库   
-***create database name;*** 创建数据库   
-***use databasename;*** 选择数据库 
-  drop database name 直接删除数据库，不提醒   show tables; 显示表 
-  describe tablename; 显示具体的表结构   select 中加上distinct去除重复字段 
-  mysqladmin drop databasename 删除数据库前，有提示。   显示当前mysql版本和当前日期   select version(),current_date;   修改mysql中root的密码： 
-  shell>mysql -h localhost -u root -p //登录 
-  mysql> update user set password=password("xueok654123") where user='root';   mysql> flush privileges //刷新数据库   mysql>use dbname; 打开数据库：   mysql>show databases; 显示所有数据库 
-  mysql>show tables; 显示数据库mysql中所有的表：先use mysql;然后   mysql>describe user; 显示表mysql数据库中user表的列信息);   grant 
-  创建用户firstdb(密码firstdb)和数据库，并赋予权限于firstdb数据库   mysql> create database firstdb; 
-  mysql> grant all on firstdb.* to firstdb identified by 'firstdb'   会自动创建用户firstdb 
-  mysql默认的是本地主机是localhost,对应的IP地址就是127.0.0.1，所以你用你的IP地址登录会出错，如果你想用你的IP地址登录就要先进行授权用grant命令。   mysql>grant all on *.* to root@202.116.39.2 identified by "123456";   说明:grant 与on 之间是各种权限，例如:insert,select,update等 
-  on 之后是数据库名和表名,第一个*表示所有的数据库，第二个*表示所有的表 
-  root可以改成你的用户名，@后可以跟域名或IP地址，identified by 后面的是登录用的密码，可以省略，即缺省密码或者叫空密码。   drop database firstdb; 
-  创建一个可以从任何地方连接服务器的一个完全的超级用户，但是必须使用一个口令something做这个 
-  mysql> grant all privileges on *.* to user@localhost identified by 'something' with   增加新用户 
-  格式：grant select on 数据库.* to 用户名@登录主机 identified by "密码"
 
+***create database name;*** 创建数据库   
+
+***use databasename;*** 选择数据库 
+
+***drop database name;*** 直接删除数据库，不提醒   
+
+show tables; 显示表 
+
+describe tablename; 显示具体的表结构  
+
+mysqladmin -u root -p drop databasename; 删除数据库前，有提示
  
-  FROM orders 
+select version(),current_date; 显示当前mysql版本和当前日期      
+
+修改mysql中root的密码： 
+
+```mysql
+    shell>mysql -h localhost -u root -p //登录 
+    mysql>use mysql;  // 进入mysql数据库，user表中存放着所有的MYSQL用户信息
+    mysql> update user set password=password("xueok654123") where user='root';   
+    mysql>describe user; 显示表mysql数据库中user表的列信息);   
+```
+
+增加新用户并授予一定权限（格式：grant select on 数据库.* to 用户名@登陆主机 identified by '密码'）：
+
+```mysql
+    grant select, insert, update, delete on *.* to shirly@"%" identified by 'shirly' // 增加一个用户shirly密码为shirly，让她可以再任何主机上登陆，并对所有数据库有查询、插入、修改、删除的权限(前提是用root用户连入MYSQL)
+
+    grant select,insert,update,delete on mydb.* to test2@localhost identified by “abc”; //增加一个用户test2密码为abc,让他只可以在localhost上登录，并可以对数据库mydb进行查询、插入、修改、删除的操作（localhost指本地主机，即MYSQL数据库所在的那台主机），这样用户即使有test2的密码，他也无法从internet上直接访问数据库，只能通过MYSQL主机上的web页来访问了。
+
+    grant select,insert,update,delete on mydb.* to test2@localhost identified by “”; //不想test2有密码  
+    
+    grant all on *.* to 'someuser'@'somehost' identified by 'password';  //mysql默认的是本地主机是localhost,对应的IP地址就是127.0.0.1，所以你用你的IP地址登录会出错，如果你想用你的IP地址登录就要先用grant命令进行授权。
+
+```
+
+重命名表: 
+```mysql
+  mysql > alter table t1 rename t2;   
+```
+
+mysqldump 备份数据库:
+```mysql
+    shell> mysqldump -h host -u root -p dbname >dbname_backup.sql 
+``` 
+
+恢复数据库:
+```mysql
+
+``` 
+  shell> mysqladmin -h myhost -u root -p create dbname 
+  shell> mysqldump -h host -u root -p dbname < dbname_backup.sql   如果只想卸出建表指令，则命令如下： 
+  shell> mysqladmin -u root -p -d databasename > a.sql 
+  如果只想卸出插入数据的sql命令，而不需要建表命令，则命令如下：   shell> mysqladmin -u root -p -t databasename > a.sql 
+  那么如果我只想要数据，而不想要什么sql命令时，应该如何操作呢?   mysqldump -T./ phptest driver 
+
+
+
+  <!-- FROM orders 
   Where orderDate>#1/1/96# AND orderDate<#1/30/96#   注意： 
   Mcirosoft JET SQL 中，日期用'#'定界。日期也可以用Datevalue()函数来代替。   在比较字符型的数据时，要加上单引号''，尾空格在比较中被忽略。   例： 
   Where orderDate>#96-1-1#   也可以表示为： 
@@ -68,25 +109,11 @@
   例：如果想了解客户的信息，并统计各个地区的客户分布，这时可以用一个右连接   ，即使某个地区没有客户，也要返回客户信息。 
   空值不会相互匹配，可以通过外连接才能测试被连接的某个表的字段是否有空值。   Select *   FROM talbe1
 
- 
-  mysql> update user set password=password(”xueok654123″) where user=‟root‟;   mysql> flush privileges //刷新数据库   mysql>use dbname; 打开数据库：   mysql>show databases; 显示所有数据库 
-  mysql>show tables; 显示数据库mysql中所有的表：先use mysql;然后   mysql>describe user; 显示表mysql数据库中user表的列信息);   3、grant 
-  创建一个可以从任何地方连接服务器的一个完全的超级用户，但是必须使用一个口令something做这个 
-  mysql> grant all privileges on *.* to user@localhost identified by ‟something‟ with   增加新用户 
-  格式：grant select on 数据库.* to 用户名@登录主机 identified by “密码” 
-  GRANT ALL PRIVILEGES ON *.* TO monty@localhost IDENTIFIED BY ‟something‟ WITH GRANT OPTION; 
-  GRANT ALL PRIVILEGES ON *.* TO mailto:monty@”” IDENTIFIED BY ‟something‟ WITH GRANT OPTION;   删除授权： 
-  mysql> revoke all privileges on *.* from mailto:root@””;   mysql> delete from user where user=”root” and host=”%”;   mysql> flush privileges; 
-  创建一个用户custom在特定客户端it363.com登录，可访问特定数据库fangchandb 
-  mysql >grant select, insert, update, delete, create,drop on fangchandb.* to custom@ it363.com identified by „ passwd‟   重命名表: 
-  mysql > alter table t1 rename t2;   4、mysqldump   备份数据库 
-  shell> mysqldump -h host -u root -p dbname >dbname_backup.sql   恢复数据库 
-  shell> mysqladmin -h myhost -u root -p create dbname 
-  shell> mysqldump -h host -u root -p dbname < dbname_backup.sql   如果只想卸出建表指令，则命令如下： 
-  shell> mysqladmin -u root -p -d databasename > a.sql 
-  如果只想卸出插入数据的sql命令，而不需要建表命令，则命令如下：   shell> mysqladmin -u root -p -t databasename > a.sql 
-  那么如果我只想要数据，而不想要什么sql命令时，应该如何操作呢?   mysqldump -T./ phptest driver 
+ select 中加上distinct去除重复字段 
 
+```mysql
+
+```
 
   其中，只有指定了-T参数才可以卸出纯文本文件，表示卸出数据的目录，./表示当前目录，即与mysqldump同一目录。如果不指定driver 表，则将卸出整个数据库的数据。每个表会生成两个文件，一个为.sql文件，包含建表执行。另一个为.txt文件，只包含数据，且没有sql指令。 
   5、可将查询存储在一个文件中并告诉mysql从文件中读取查询而不是等待键盘输入。可利用外壳程序键入重定向实用程序来完成这项工作。例如，如果在文件my_file.sql 中存放有查   询，可如下执行这些查询： 
@@ -116,7 +143,7 @@
   Alter TABLE userpic CHARACTER SET gb2312;   // mysql jdbc连接url 使用中文 
   jdbc:mysql://localhost/test?useUnicode=true&characterEncoding=gb2312   // 执行外部脚本   source  
   MySQL是最受欢迎的开源SQL数据库管理系统，由MySQL AB开发、发布和支持。MySQL AB是一家基于MySQL开发人员的商业公司，是一家使用了一种成功的商业模式来结合开源价值和方****的第二代开源公司。MySQL是MySQL AB的注册商标。 
-  MySQL是一个快速的、多线程、多用户和健壮的SQL数据库服务器。MySQL服务器支持关键任务、重负载生产系统的使用，也可以将它嵌入到一个大配置(mass-deployed)的软件中去。
+  MySQL是一个快速的、多线程、多用户和健壮的SQL数据库服务器。MySQL服务器支持关键任务、重负载生产系统的使用，也可以将它嵌入到一个大配置(mass-deployed)的软件中去。 -->
 
 
 
@@ -134,7 +161,7 @@
 
 [讲述mysql索引和优化的故事](http://database.51cto.com/art/201107/278040.htm)
 
-***mysql应该读的书列表***：
+**mysql读书列表**：
 
 * [《SQL学习指南》](../pdf/SQL学习指南.pdf)
 * [《MYSQL性能调优与架构设计》](../pdf/MySQL性能调优与架构设计.pdf)
