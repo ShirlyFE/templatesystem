@@ -61,17 +61,17 @@
 
 ### 参考资料
 
-[mysql的安装配置使用教程](http://www.cnblogs.com/mr-wid/archive/2013/05/09/3068229.html)
+* [mysql的安装配置使用教程](http://www.cnblogs.com/mr-wid/archive/2013/05/09/3068229.html)
 
-[mysql and node tutorial in production](http://codeforgeek.com/2015/01/nodejs-mysql-tutorial/)
+* [mysql and node tutorial in production](http://codeforgeek.com/2015/01/nodejs-mysql-tutorial/)
 
-[优化网站性能之数据库架构篇](http://www.lovelucy.info/website-database-optimization.html)
+* [优化网站性能之数据库架构篇](http://www.lovelucy.info/website-database-optimization.html)
 
-[《MongoDB实战》试读：第一章：为现代Web而生的数据库](http://book.douban.com/reading/21674153/)
+* [《MongoDB实战》试读：第一章：为现代Web而生的数据库](http://book.douban.com/reading/21674153/)
 
-[MySQL索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
+* [MySQL索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
 
-[讲述mysql索引和优化的故事](http://database.51cto.com/art/201107/278040.htm)
+* [讲述mysql索引和优化的故事](http://database.51cto.com/art/201107/278040.htm)
 
 **mysql读书列表**：
 
