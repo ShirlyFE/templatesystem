@@ -21,10 +21,10 @@ select version(),current_date; 显示当前mysql版本和当前日期     
 修改mysql中root的密码： 
 
 ```javascript
-    shell>mysql -h localhost -u root -p //登录 
-    mysql>use mysql;  // 进入mysql数据库，user表中存放着所有的MYSQL用户信息
+    shell> mysql -h localhost -u root -p //登录 
+    mysql> use mysql;  // 进入mysql数据库，user表中存放着所有的MYSQL用户信息
     mysql> update user set password=password("xueok654123") where user='root';   
-    mysql>describe user; 显示表mysql数据库中user表的列信息);   
+    mysql> describe user; 显示表mysql数据库中user表的列信息);   
 ```
 
 增加新用户并授予一定权限（格式：grant select on 数据库.* to 用户名@登陆主机 identified by '密码'）：
@@ -43,7 +43,7 @@ select version(),current_date; 显示当前mysql版本和当前日期     
 重命名表:
  
 ```javascript
-   mysql > alter table t1 rename t2;   
+   mysql> alter table t1 rename t2;   
 ```
 
 mysqldump 备份数据库:
