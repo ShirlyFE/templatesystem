@@ -15,7 +15,7 @@ show tables; 显示表 
 describe tablename; 显示具体的表结构  
 
 mysqladmin -u root -p drop databasename; 删除数据库前，有提示
- 
+
 select version(),current_date; 显示当前mysql版本和当前日期      
 
 修改mysql中root的密码： 
