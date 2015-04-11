@@ -20,7 +20,7 @@
 
 **修改mysql中root的密码：** 
 
-```shell
+```javascript
     shell>mysql -h localhost -u root -p //登录 
     mysql>use mysql;  // 进入mysql数据库，user表中存放着所有的MYSQL用户信息
     mysql> update user set password=password("xueok654123") where user='root';   
@@ -29,7 +29,7 @@
 
 **增加新用户并授予一定权限（格式：grant select on 数据库.* to 用户名@登陆主机 identified by '密码'）：**
 
-```shell
+```javascript
     grant select, insert, update, delete on *.* to shirly@"%" identified by 'shirly' // 增加一个用户shirly密码为shirly，让她可以再任何主机上登陆，并对所有数据库有查询、插入、修改、删除的权限(前提是用root用户连入MYSQL)
 
     grant select,insert,update,delete on mydb.* to test2@localhost identified by “abc”; //增加一个用户test2密码为abc,让他只可以在localhost上登录，并可以对数据库mydb进行查询、插入、修改、删除的操作（localhost指本地主机，即MYSQL数据库所在的那台主机），这样用户即使有test2的密码，他也无法从internet上直接访问数据库，只能通过MYSQL主机上的web页来访问了。
@@ -42,19 +42,19 @@
 
 **重命名表:**
  
-```shell
-  mysql > alter table t1 rename t2;   
+```javascript
+   mysql > alter table t1 rename t2;   
 ```
 
 **mysqldump 备份数据库:**
 
-```shell
+```javascript
     shell> mysqldump -h host -u root -p dbname >dbname_backup.sql 
 ``` 
 
 **恢复数据库:**
 
-```shell
+```javascript
     shell> mysqladmin -h myhost -u root -p create dbname 
     shell> mysqldump -h host -u root -p dbname < dbname_backup.sql  
 ``` 
