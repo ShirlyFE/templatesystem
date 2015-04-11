@@ -2,23 +2,23 @@
 
 ### mysql常用命令
 
-**show databases;** 显示数据库   
+show databases; 显示数据库   
 
-**create database name;** 创建数据库   
+create database name; 创建数据库   
 
-**use databasename;** 选择数据库 
+use databasename; 选择数据库 
 
-**drop database name;** 直接删除数据库，不提醒   
+drop database name; 直接删除数据库，不提醒   
 
-**show tables;** 显示表 
+show tables; 显示表 
 
-**describe tablename;** 显示具体的表结构  
+describe tablename; 显示具体的表结构  
 
-**mysqladmin -u root -p drop databasename;** 删除数据库前，有提示
+mysqladmin -u root -p drop databasename; 删除数据库前，有提示
  
-**select version(),current_date;** 显示当前mysql版本和当前日期      
+select version(),current_date; 显示当前mysql版本和当前日期      
 
-**修改mysql中root的密码：** 
+修改mysql中root的密码： 
 
 ```javascript
     shell>mysql -h localhost -u root -p //登录 
@@ -27,7 +27,7 @@
     mysql>describe user; 显示表mysql数据库中user表的列信息);   
 ```
 
-**增加新用户并授予一定权限（格式：grant select on 数据库.* to 用户名@登陆主机 identified by '密码'）：**
+增加新用户并授予一定权限（格式：grant select on 数据库.* to 用户名@登陆主机 identified by '密码'）：
 
 ```javascript
     grant select, insert, update, delete on *.* to shirly@"%" identified by 'shirly' // 增加一个用户shirly密码为shirly，让她可以再任何主机上登陆，并对所有数据库有查询、插入、修改、删除的权限(前提是用root用户连入MYSQL)
@@ -40,19 +40,19 @@
 
 ```
 
-**重命名表:**
+重命名表:
  
 ```javascript
    mysql > alter table t1 rename t2;   
 ```
 
-**mysqldump 备份数据库:**
+mysqldump 备份数据库:
 
 ```javascript
     shell> mysqldump -h host -u root -p dbname >dbname_backup.sql 
 ```
 
-**恢复数据库:**
+恢复数据库:
 
 ```javascript
     shell> mysqladmin -h myhost -u root -p create dbname 
