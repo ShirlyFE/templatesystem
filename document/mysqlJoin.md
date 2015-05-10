@@ -1,3 +1,5 @@
+# mysql的集合和连接概念的理解
+
 ### 交叉连接（笛卡尔积）：
 ```mysql
 mysql> select * from (select 1 num, 'a' str) t1 inner join (select 2 num, 23 age
